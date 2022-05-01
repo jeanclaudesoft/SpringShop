@@ -43,7 +43,7 @@ public class CategoryController {
         return "redirect:/category/list";
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteCategory(@PathVariable("id") int id){
         categoryService.deleteCategory(id);
         return "redirect:/category/list";

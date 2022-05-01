@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
@@ -34,6 +36,8 @@ public class ArticleController {
 
     @PostMapping("/save")
     public String saveCategory(Product product){
+        product.setStockQuantity(0);
+        product.setDateCreation(LocalDate.now());
         articleyService.createProduct(product);
         return "redirect:/article/list";
     }
@@ -50,7 +54,7 @@ public class ArticleController {
         return "redirect:/article/list";
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteArticle(@PathVariable("id") int id){
         articleyService.deleteProduct(id);
         return "redirect:/article/list";
