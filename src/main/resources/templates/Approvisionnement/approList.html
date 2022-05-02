@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Liste des articles</title>
+    <title>Liste des approvisionnements</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -150,7 +150,7 @@
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="archive"></i>
                             <span data-key="t-ecommerce">Catégories</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
@@ -163,7 +163,7 @@
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="shopping-bag"></i>
                             <span data-key="t-ecommerce">Articles</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
@@ -180,14 +180,14 @@
                             <span data-key="t-ecommerce">Approvisionnement</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="/appro/list" key="t-products">Liste</a></li>
+                            <li><a href="/appro/list" key="appro">Liste</a></li>
 
                         </ul>
                     </li>
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="gift"></i>
                             <span data-key="t-ecommerce">Ventes</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
@@ -223,11 +223,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Tous les articles</h4>
+                            <h4 class="mb-sm-0 font-size-18">Les approvisionnements</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Articles</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Approvisionnements</a></li>
                                     <li class="breadcrumb-item active">Liste</li>
                                 </ol>
                             </div>
@@ -236,28 +236,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xl-3 col-md-6">
-                        <!-- card -->
-                        <div class="card card-h-100">
-                            <!-- card body -->
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total</span>
-                                        <h4 class="mb-3">
-                                            <span  th:text="${totalProduct}"></span>
-                                        </h4>
-
-                                    </div>
-
-                                    <div class="flex-shrink-0 text-end dash-widget">
-                                        <div id="mini-chart1" data-colors='["#1c84ee", "#33c38e"]' class="apex-charts"></div>
-                                    </div>
-                                </div>
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
 
 
 
@@ -275,36 +253,26 @@
                                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                         <thead>
                                         <tr>
-                                            <th> ID</th>
-                                            <th>Catégorie</th>
+                                            <th>ID</th>
+                                            <th>Article</th>
                                             <th>Date Création</th>
-                                            <th>Libellé</th>
-                                            <th>Prix</th>
-                                            <th>Quantité Seuille</th>
-                                            <th>En Stock</th>
+                                            <th>Quantité</th>
                                             <th>Action</th>
 
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr data-id="1" th:each="article:${articleList}">
-                                            <td th:text="${article.id}"></td>
-                                            <td th:text="${article.category.designation}"></td>
-                                            <td th:text="${article.dateCreation}"></td>
-                                            <td th:text="${article.libelle}"></td>
-                                            <td th:text="${article.price}"></td>
-                                            <td th:text="${article.quantitySeuil}"></td>
-                                            <td th:text="${article.stockQuantity}"></td>
+                                        <tr data-id="1" th:each="appro:${approList}">
+                                            <td th:text="${appro.id}"></td>
+                                            <td th:text="${appro.article.libelle}"></td>
+                                            <td th:text="${appro.dateAppro}"></td>
+                                            <td th:text="${appro.quantity}"></td>
                                             <td style="width: 100px">
-                                                <a th:href="@{/article/update/{id}(id=${article.id})}"  class="btn btn-outline-secondary" title="Edit">
+                                                <a th:href="@{/appro/update/{id}(id=${appro.id})}"  class="btn btn-outline-secondary" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                                <a class="btn btn-outline-danger" th:href="@{/article/delete/{id}(id=${article.id})}" title="Supprimer">
+                                                <a class="btn btn-outline-danger" th:href="@{/appro/delete/{id}(id=${appro.id})}" title="Supprimer">
                                                     <i class="fas fa-trash-alt"></i>
-                                                </a>
-
-                                                <a class="btn btn-outline-primary" th:href="@{/article/appro/{id}(id=${article.id})}" title="Approvisionner">
-                                                    <i class="fas fa-cart-arrow-down"></i>
                                                 </a>
 
 

@@ -150,12 +150,12 @@
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="archive"></i>
                             <span data-key="t-ecommerce">Catégories</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="/category/list" data-key="t-products">Liste</a></li>
-                            <li><a href="/category/add" data-key="t-product-detail">Ajouter</a></li>
+                            <li><a href="/category/add" data-key="t-add-product">Ajouter</a></li>
 
                         </ul>
                     </li>
@@ -163,13 +163,13 @@
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="shopping-bag"></i>
                             <span data-key="t-ecommerce">Articles</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="/article/list">Liste des articles</a></li>
                             <li><a href="/article/add" data-key="t-product-detail">Ajouter un article</a></li>
-                            <li><a href="/article/stock" data-key="t-product-detail">Stock</a></li>
+                            <li><a href="/article/stock" data-key="stock">Articles à approvisionner</a></li>
 
                         </ul>
                     </li>
@@ -180,15 +180,14 @@
                             <span data-key="t-ecommerce">Approvisionnement</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="ecommerce-products.html" key="t-products">Liste</a></li>
-                            <li><a href="ecommerce-product-detail.html" data-key="t-product-detail">Ajouter</a></li>
+                            <li><a href="/appro/list" key="appro">Liste</a></li>
 
                         </ul>
                     </li>
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="gift"></i>
                             <span data-key="t-ecommerce">Ventes</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
@@ -202,8 +201,7 @@
                 </ul>
 
 
-            </div>
-            <!-- Sidebar -->
+            </div>            <!-- Sidebar -->
         </div>
     </div>
     <!-- Left Sidebar End -->
@@ -268,12 +266,9 @@
                                     <div class="flex-grow-1">
                                         <span class="text-muted mb-3 lh-1 d-block text-truncate">Articles</span>
                                         <h4 class="mb-3">
-                                            <span class="counter-value" data-target="1256">0</span>
+                                            <span  th:text="${totalProduct}"></span>
                                         </h4>
-                                        <div class="text-nowrap">
-                                            <span class="badge bg-soft-danger text-danger">-29 Trades</span>
-                                            <span class="ms-1 text-muted font-size-13">Since last week</span>
-                                        </div>
+
                                     </div>
                                     <div class="flex-shrink-0 text-end dash-widget">
                                         <div id="mini-chart2" data-colors='["#1c84ee", "#33c38e"]' class="apex-charts"></div>
@@ -290,9 +285,10 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1">
-                                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Stock</span>
+                                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Approvisionnement</span>
                                         <h4 class="mb-3">
-                                            $<span class="counter-value" data-target="7.54">0</span>M
+                                            <span  th:text="${totalAppro}"></span>
+
                                         </h4>
                                         <div class="text-nowrap">
                                             <span class="badge bg-soft-success text-success">+ $2.8k</span>
@@ -314,17 +310,15 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1">
-                                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Ventes</span>
+                                        <span class="text-muted mb-3 lh-1 d-block text-truncate">A Approvisionner</span>
                                         <h4 class="mb-3">
-                                            <span class="counter-value" data-target="18.34">0</span>%
+                                            <span  th:text="${totalStock}"></span>
+
                                         </h4>
-                                        <div class="text-nowrap">
-                                            <span class="badge bg-soft-success text-success">+5.32%</span>
-                                            <span class="ms-1 text-muted font-size-13">Since last week</span>
-                                        </div>
+
                                     </div>
                                     <div class="flex-shrink-0 text-end dash-widget">
-                                        <div id="mini-chart4" data-colors='["#1c84ee", "#33c38e"]' class="apex-charts"></div>
+                                        <div id="mini-chart7" data-colors='["#1c84ee", "#33c38e"]' class="apex-charts"></div>
                                     </div>
                                 </div>
                             </div><!-- end card body -->
@@ -339,7 +333,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1">
-                                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Nombre d evente du mois</span>
+                                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Nombre de vente du mois</span>
                                         <h4 class="mb-3">
                                             <span class="text" th:text="${totalCategory}"></span>
                                         </h4>
@@ -375,53 +369,9 @@
                         </div><!-- end card -->
                     </div><!-- end col-->
 
-                    <div class="col-xl-3 col-md-6">
-                        <!-- card -->
-                        <div class="card card-h-100">
-                            <!-- card body -->
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Stock</span>
-                                        <h4 class="mb-3">
-                                            $<span class="counter-value" data-target="7.54">0</span>M
-                                        </h4>
-                                        <div class="text-nowrap">
-                                            <span class="badge bg-soft-success text-success">+ $2.8k</span>
-                                            <span class="ms-1 text-muted font-size-13">Since last week</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-shrink-0 text-end dash-widget">
-                                        <div id="mini-chart7" data-colors='["#1c84ee", "#33c38e"]' class="apex-charts"></div>
-                                    </div>
-                                </div>
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
 
-                    <div class="col-xl-3 col-md-6">
-                        <!-- card -->
-                        <div class="card card-h-100">
-                            <!-- card body -->
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Ventes</span>
-                                        <h4 class="mb-3">
-                                            <span class="counter-value" data-target="18.34">0</span>%
-                                        </h4>
-                                        <div class="text-nowrap">
-                                            <span class="badge bg-soft-success text-success">+5.32%</span>
-                                            <span class="ms-1 text-muted font-size-13">Since last week</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-shrink-0 text-end dash-widget">
-                                        <div id="mini-chart8" data-colors='["#1c84ee", "#33c38e"]' class="apex-charts"></div>
-                                    </div>
-                                </div>
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
+
+
                 </div><!-- end row-->
                 <!-- end row-->
 

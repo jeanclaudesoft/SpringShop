@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Approvionner un article</title>
+    <title>Modifier</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -150,7 +150,7 @@
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="archive"></i>
                             <span data-key="t-ecommerce">Catégories</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
@@ -163,7 +163,7 @@
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="shopping-bag"></i>
                             <span data-key="t-ecommerce">Articles</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
@@ -180,14 +180,14 @@
                             <span data-key="t-ecommerce">Approvisionnement</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="/appro/list" key="t-products">Liste</a></li>
+                            <li><a href="/appro/list" key="appro">Liste</a></li>
 
                         </ul>
                     </li>
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="gift"></i>
                             <span data-key="t-ecommerce">Ventes</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
@@ -223,12 +223,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Approvisionner</h4>
+                            <h4 class="mb-sm-0 font-size-18">Modifier</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Articles</a></li>
-                                    <li class="breadcrumb-item active">Approvisionner</li>
+                                    <li class="breadcrumb-item active">Modifier</li>
                                 </ol>
                             </div>
 
@@ -242,30 +242,30 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Remplisser ce champ</h4>
-                            </div>
                             <div class="card-body">
-                                <form th:action="@{/appro/save}" method="post" th:object="${singleProduct}">
+                                <form th:action="@{/appro/update}" method="post" th:object="${singleProduct}">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <input type="hidden" th:value="*{id}" name="articleId" class="form-control" >
+                                                <input type="hidden" th:value="*{articleId}" name="articleId" class="form-control" >
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="hidden" th:value="*{id}" name="id" class="form-control" >
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Article</label>
-                                                <input type="text" class="form-control"  th:field="*{libelle}" readonly  />
+                                                <input type="text" class="form-control"  th:field="*{product.libelle}" readonly  />
                                             </div>
                                             <div class="mb-3">
                                                 <label for="productname">Quantité</label>
-                                                <input id="productname" name="quantity" type="number" class="form-control" required>
+                                                <input id="productname" name="quantity" type="number" class="form-control" th:field="*{quantity}" required>
                                             </div>
 
                                         </div>
                                     </div>
 
                                     <div class="d-flex flex-wrap gap-2">
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Modifier</button>
                                     </div>
                                 </form>
 

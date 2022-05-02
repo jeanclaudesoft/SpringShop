@@ -150,7 +150,7 @@
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="archive"></i>
                             <span data-key="t-ecommerce">Catégories</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
@@ -163,13 +163,13 @@
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="shopping-bag"></i>
                             <span data-key="t-ecommerce">Articles</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="/article/list">Liste des articles</a></li>
                             <li><a href="/article/add" data-key="t-product-detail">Ajouter un article</a></li>
-                            <li><a href="/article/stock" data-key="t-product-detail">Stock</a></li>
+                            <li><a href="/article/stock" data-key="stock">Articles à approvisionner</a></li>
 
                         </ul>
                     </li>
@@ -180,15 +180,14 @@
                             <span data-key="t-ecommerce">Approvisionnement</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="ecommerce-products.html" key="t-products">Liste</a></li>
-                            <li><a href="ecommerce-product-detail.html" data-key="t-product-detail">Ajouter</a></li>
+                            <li><a href="/appro/list" key="appro">Liste</a></li>
 
                         </ul>
                     </li>
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
-                            <i data-feather="shopping-cart"></i>
+                            <i data-feather="gift"></i>
                             <span data-key="t-ecommerce">Ventes</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
@@ -203,7 +202,6 @@
 
 
             </div>
-            <!-- Sidebar -->
         </div>
     </div>
     <!-- Left Sidebar End -->
@@ -247,7 +245,7 @@
                             <div class="card-body">
 
                                 <div class="table-responsive">
-                                    <table class="table table-editable table-nowrap align-middle table-edits">
+                                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
@@ -261,10 +259,10 @@
                                             <td data-field="id" style="width: 80px" th:text="${category.id}"></td>
                                             <td data-field="designation" th:text="${category.designation}"></td>
                                             <td style="width: 100px">
-                                                <a  class="btn btn-outline-secondary" title="Edit">
+                                                <a th:href="@{/category/update/{id}(id=${category.id})}" class="btn btn-outline-secondary" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                                <a class="btn btn-outline-danger" th:href="@{/category/delete/{id}(id=${category.id})}">
+                                                <a class="btn btn-outline-danger" th:href="@{/category/delete/{id}(id=${category.id})}" title="Supprimer">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
 
@@ -453,7 +451,8 @@
 <script th:src="@{/assets/libs/feather-icons/feather.min.js}"></script>
 <!-- pace js -->
 <script th:src="@{/assets/libs/pace-js/pace.min.js}"></script>
-
+<script th:src="@{/assets/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
 <!-- apexcharts -->
 <script th:src="@{/assets/libs/apexcharts/apexcharts.min.js}"></script>
 
@@ -464,6 +463,9 @@
 <script th:src="@{/assets/js/pages/dashboard.init.js}"></script>
 
 <script th:src="@{/assets/js/app.js}"></script>
+
+<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
+
 
 </body>
 
