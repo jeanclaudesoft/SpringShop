@@ -1,7 +1,6 @@
 package com.claudylab.shop.services;
 
 import com.claudylab.shop.models.Product;
-import com.claudylab.shop.models.Product;
 import com.claudylab.shop.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ArticleyService {
+public class ArticleService {
 
     @Autowired
     private ArticleRepository articleRepository;
@@ -34,5 +33,12 @@ public class ArticleyService {
         return  articleRepository.count();
     }
 
+    public void updateStock(int id,int qte){
+        articleRepository.updateStock(id,qte);
+    }
+
+    public List<Product> underStocktList(){
+        return articleRepository.underStockProduct();
+    }
 
 }

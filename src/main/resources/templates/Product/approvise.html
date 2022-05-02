@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Ajouter une catégorie</title>
+    <title>Approvionner</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -223,12 +223,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Ajouter une catégorie</h4>
+                            <h4 class="mb-sm-0 font-size-18">Articles à approvisionner</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Catégorie</a></li>
-                                    <li class="breadcrumb-item active">Ajouter</li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Articles</a></li>
+                                    <li class="breadcrumb-item active">A approvisionner</li>
                                 </ol>
                             </div>
 
@@ -242,32 +242,50 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Remplisser ce champ</h4>
-                            </div>
+
                             <div class="card-body">
-                                <form th:action="@{/category/save}" method="post">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="mb-3">
-                                                <label for="productname">Désignation</label>
-                                                <input id="productname" name="designation" type="text" class="form-control" required>
-                                            </div>
 
-                                        </div>
-                                    </div>
+                                <div class="table-responsive">
+                                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                        <thead>
+                                        <tr>
+                                            <th> ID</th>
+                                            <th>Catégorie</th>
+                                            <th>Date Création</th>
+                                            <th>Libellé</th>
+                                            <th>Prix</th>
+                                            <th>Quantité Seuille</th>
+                                            <th>En Stock</th>
+                                            <th>Action</th>
 
-                                    <div class="d-flex flex-wrap gap-2">
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
-                                    </div>
-                                </form>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr data-id="1" th:each="article:${articleList}">
+                                            <td th:text="${article.id}"></td>
+                                            <td th:text="${article.category.designation}"></td>
+                                            <td th:text="${article.dateCreation}"></td>
+                                            <td th:text="${article.libelle}"></td>
+                                            <td th:text="${article.price}"></td>
+                                            <td th:text="${article.quantitySeuil}"></td>
+                                            <td th:text="${article.stockQuantity}"></td>
+                                            <td style="width: 100px">
+
+                                                <a class="btn btn-outline-primary" th:href="@{/article/appro/{id}(id=${article.id})}" title="Approvisionner">
+                                                    <i class="fas fa-cart-arrow-down"></i>
+                                                </a>
+
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
                             </div>
                         </div>
-
-
-                    </div>
-                </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
 
             </div>
             <!-- container-fluid -->
@@ -453,6 +471,10 @@
 <script th:src="@{/assets/js/pages/dashboard.init.js}"></script>
 
 <script th:src="@{/assets/js/app.js}"></script>
+<script th:src="@{/assets/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+
+<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
 
 </body>
 

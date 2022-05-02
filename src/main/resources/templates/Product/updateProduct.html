@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Ajouter une catégorie</title>
+    <title>Modifier un article</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -223,12 +223,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Ajouter une catégorie</h4>
+                            <h4 class="mb-sm-0 font-size-18">Modifier un article</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Catégorie</a></li>
-                                    <li class="breadcrumb-item active">Ajouter</li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Articles</a></li>
+                                    <li class="breadcrumb-item active">Modifier</li>
                                 </ol>
                             </div>
 
@@ -242,23 +242,48 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Remplisser ce champ</h4>
-                            </div>
+
                             <div class="card-body">
-                                <form th:action="@{/category/save}" method="post">
+                                <form th:action="@{/article/update}" method="post" th:object="${singleProduct}">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <label for="productname">Désignation</label>
-                                                <input id="productname" name="designation" type="text" class="form-control" required>
+                                                <div class="mb-3">
+                                                    <input type="hidden" th:field="*{id}" class="form-control" >
+                                                    <input type="hidden" th:field="*{dateCreation}" class="form-control" >
+                                                    <input type="hidden" th:field="*{stockQuantity}" class="form-control" >
+                                                </div>
+                                                <label for="productname">Libellé</label>
+                                                <input id="productname" name="libelle" type="text" class="form-control" th:field="*{libelle}" required>
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="manufacturername">Prix</label>
+                                                <input id="manufacturername" name="price" type="number" class="form-control" th:field="*{price}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="seuil">Quantité Seuil</label>
+                                                <input id="seuil" name="quantitySeuil" type="number" class="form-control" th:field="*{quantitySeuil}" required>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label class="control-label">Categorie</label>
+                                                <select name="categoryId" class="form-control select2"  required>
+                                                    <option value="">Choisissez</option>
+                                                    <option th:each="category:${categoryList}"
+                                                            th:value="${category.id}"
+                                                            th:text="${category.designation}">
+                                                </select>
+                                            </div>
+
 
                                         </div>
                                     </div>
 
                                     <div class="d-flex flex-wrap gap-2">
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Modifier</button>
                                     </div>
                                 </form>
 

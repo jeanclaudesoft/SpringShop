@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Ajouter une catégorie</title>
+    <title>Approvionner un article</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -223,12 +223,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Ajouter une catégorie</h4>
+                            <h4 class="mb-sm-0 font-size-18">Approvisionner</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Catégorie</a></li>
-                                    <li class="breadcrumb-item active">Ajouter</li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Articles</a></li>
+                                    <li class="breadcrumb-item active">Approvisionner</li>
                                 </ol>
                             </div>
 
@@ -246,12 +246,19 @@
                                 <h4 class="card-title">Remplisser ce champ</h4>
                             </div>
                             <div class="card-body">
-                                <form th:action="@{/category/save}" method="post">
+                                <form th:action="@{/appro/save}" method="post" th:object="${singleProduct}">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
-                                                <label for="productname">Désignation</label>
-                                                <input id="productname" name="designation" type="text" class="form-control" required>
+                                                <input type="hidden" th:value="*{id}" name="articleId" class="form-control" >
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Article</label>
+                                                <input type="text" class="form-control"  th:field="*{libelle}" readonly  />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="productname">Quantité</label>
+                                                <input id="productname" name="quantity" type="number" class="form-control" required>
                                             </div>
 
                                         </div>
