@@ -197,7 +197,17 @@
 
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i data-feather="users"></i>
+                            <span data-key="t-ecommerce">Utilisateurs</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="/users/add" key="add-user">Ajouter</a></li>
+                            <li><a href="/users/list" data-key="user-list">Liste</a></li>
 
+                        </ul>
+                    </li>
                 </ul>
 
 
@@ -264,7 +274,7 @@
                                         <tbody>
                                         <tr data-id="1" th:each="appro:${approList}">
                                             <td th:text="${appro.id}"></td>
-                                            <td th:text="${appro.article.libelle}"></td>
+                                            <td th:text="${appro.product.libelle}"></td>
                                             <td th:text="${appro.dateAppro}"></td>
                                             <td th:text="${appro.quantity}"></td>
                                             <td style="width: 100px">
