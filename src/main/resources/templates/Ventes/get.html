@@ -197,10 +197,9 @@
                             <span data-key="t-ecommerce">Ventes</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="ecommerce-products.html" key="t-products">Liste des ventes</a></li>
-                            <li><a href="/vente/new" data-key="t-product-detail">Faire une vente</a></li>
-                            <li><a href="ecommerce-product-detail.html" data-key="t-product-detail">Vente par
-                                période</a></li>
+                            <li><a href="/ventes/list" key="ventes">Liste des ventes</a></li>
+                            <li><a href="/vente/new" data-key="vente-new">Faire une vente</a></li>
+                            <li><a href="/ventes/filter" data-key="filter">Vente par période</a></li>
 
                         </ul>
                     </li>
@@ -276,12 +275,26 @@
                                             <form th:action="@{/vente/save/{cartId}(cartId=${cartId})}" method="post">
                                                 <td>
                                                     <div class="me-3" style="width: 120px;">
-                                                        <input type="text" value="1" name="quantity">
+                                                        <div class="input-group  bootstrap-touchspin bootstrap-touchspin-injected">
+                                                            <input type="number" onchange="change(this.value);"
+                                                                   value="1" min="1" name="demo_vertical" class="form-control" required>
+
+                                                            <script>
+                                                                function change(val) {
+                                                                        dst = document.getElementById("quantity");
+                                                                        dst.value = val;
+
+                                                                };
+
+
+                                                            </script>
+                                                        </div>
                                                     </div>
                                                 </td>
                                                 <td>
 
                                                     <input type="hidden" th:value="${article.id}" name="articleId"/>
+                                                    <input type="hidden" id="quantity" name="quantity"/>
                                                     <input type="hidden" th:value="${article.price}" name="price"/>
                                                     <button type="submit" class="btn btn-primary">Ajouter au panier
                                                     </button>
@@ -301,45 +314,7 @@
 
                 </div>
 
-                <h4 class="mb-sm-0 font-size-18">Panier</h4>
-                <br/>
-                <div class="row">
-                    <div class="col-xl-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table align-middle mb-0 table-nowrap">
-                                        <thead class="table-light">
-                                        <tr>
-                                            <th>Article</th>
-                                            <th>Prix</th>
-                                            <th>Quantité</th>
-                                            <th>Total</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="cart:${cartList}">
-                                            <td th:text="${cart.product.libelle}"></td>
-                                            <td th:text="${cart.price}"></td>
-                                            <td th:text="${cart.quantity}"></td>
-                                            <td th:text="${cart.total}"></td>
 
-                                            <td>
-                                                <button type="submit" class="btn btn-danger">Supprimer</button>
-                                            </td>
-                                        </tr>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
 
             </div>
             <!-- container-fluid -->

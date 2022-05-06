@@ -28,4 +28,12 @@ public class VenteService {
         return venteRepository.findById(id).get();
     }
 
+    public Long venteCount(){
+        return  venteRepository.count();
+    }
+
+    public Long totalVente(){
+        return venteRepository.sumTotal();
+    }
+
 }

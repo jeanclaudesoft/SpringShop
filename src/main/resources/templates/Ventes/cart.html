@@ -197,10 +197,9 @@
                             <span data-key="t-ecommerce">Ventes</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="ecommerce-products.html" key="t-products">Liste des ventes</a></li>
-                            <li><a href="/vente/new" data-key="t-product-detail">Faire une vente</a></li>
-                            <li><a href="ecommerce-product-detail.html" data-key="t-product-detail">Vente par
-                                période</a></li>
+                            <li><a href="/ventes/list" key="ventes">Liste des ventes</a></li>
+                            <li><a href="/vente/new" data-key="vente-new">Faire une vente</a></li>
+                            <li><a href="/ventes/filter" data-key="filter">Vente par période</a></li>
 
                         </ul>
                     </li>
@@ -277,16 +276,8 @@
                                                 <td>
                                                     <div class="me-3" style="width: 120px;">
                                                         <div class="input-group  bootstrap-touchspin bootstrap-touchspin-injected">
-                                                            <input type="number" onchange="change(this.value);" value="1"  name="demo_vertical" class="form-control">
+                                                            <input type="number" id="qte" oninput="change(this.value);" value="1" min="1"  name="quantity" class="form-control" required>
 
-                                                            <script>
-                                                                function change(val) {
-                                                                        dst = document.getElementById("quantity");
-                                                                        dst.value = val;
-
-                                                                };
-
-                                                            </script>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -310,35 +301,48 @@
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                                                                function change(val) {
+                                                                        dst = document.getElementById('quantity');
+                                                                        dst.value = val;
+
+                                                                };
+                                                                     var number = document.getElementById('qte');
+
+                                                                    // Listen for input event on numInput.
+                                                                    number.onkeydown = function(e) {
+                                                                        if (!((e.keyCode > 95 && e.keyCode < 106) ||
+                                                                                (e.keyCode > 47 && e.keyCode < 58) ||
+                                                                                e.keyCode == 8)) {
+                                                                            return false;
+                                                                        }
+                                                                    }
+                                                            </script>
+
                     <div class="col-xl-4">
                         <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-4">Client</h5>
+                            <div class="card-body"><h5 class="card-title mb-4">Client</h5>
+                                <form th:action="@{/ventes/{cartId}/save(cartId=${cartId})}" method="post">
+                                    <div class="mb-3">
+                                        <label for="productname">Nom</label>
+                                        <input id="productname" name="client" type="text" class="form-control" required>
+                                    </div>
+                                    <h4 class="card-title mb-3">Récapitulatif de la commande</h4>
 
-                                <div class="mb-3">
-                                    <label for="productname">Nom</label>
-                                    <input id="productname" name="client" type="text" class="form-control" required>
-                                </div>
+                                    <div class="table-responsive">
+                                        <table class="table mb-0">
+                                            <tbody>
+                                            <tr>
+                                                <td>Grand Total :</td>
+                                                <td th:text="${total}"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <br/>
 
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">Récapitulatif de la commande</h4>
-
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <tbody>
-                                        <tr>
-                                            <td>Grand Total :</td>
-                                            <td th:text="${total}"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <br />
-                                <form th:action="@{/ventes/save/{id}(id=${cartId})}" method="post">
-                                    <input type="hidden" th:value="${total}"  name="total"/>
+                                    <input type="hidden" th:value="${total}" name="total"/>
                                     <button type="submit" class="btn btn-primary">Valider le panier</button>
 
                                 </form>

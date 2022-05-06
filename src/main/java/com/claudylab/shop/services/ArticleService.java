@@ -41,6 +41,10 @@ public class ArticleService {
         articleRepository.minusStock(id,qte);
     }
 
+    public List<Product> StocktList(){
+        return articleRepository.StockProduct();
+    }
+
     public List<Product> underStocktList(){
         return articleRepository.underStockProduct();
     }

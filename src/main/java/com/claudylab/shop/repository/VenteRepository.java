@@ -11,6 +11,7 @@ import java.util.List;
 
 @Repository
 public interface VenteRepository extends JpaRepository<Vente, Integer> {
-
+    @Query(value = "SELECT sum(total) FROM Vente")
+    public Long sumTotal();
 
 }

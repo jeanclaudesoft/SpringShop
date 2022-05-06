@@ -33,23 +33,30 @@ public class VenteController {
     }
 
 
-    @PostMapping("/save/{id}")
-    public String saveVente(@PathVariable("id") String id,Vente vente){
+    @PostMapping("/{cartId}/save")
+    public String saveVente(@PathVariable("cartId") String id,Vente vente){
+        System.out.println("MON ID " + cartService.cartList(id).get(1).getProduct().getId());
         for (int i = 0; i <  cartService.cartList(id).size(); i++) {
-            articleService.minusStock(cartService.cartList(id).get(i).getArticleId(),cartService.cartList(id).get(i).getQuantity());
+            articleService.minusStock(cartService.cartList(id).get(i).getProduct().getId(),cartService.cartList(id).get(i).getQuantity());
         }
         vente.setDate(LocalDate.now());
         vente.setCartId(id);
         venteService.saveVente(vente);
-        return "redirect:/ventes/list";
+
+        return "redirect:/ventes/recu/"+vente.getId();
     }
 
-    @GetMapping("/update/{id}")
+    @GetMapping("/recu/{id}")
     public String updateView(@PathVariable("id") int id,Model model){
         model.addAttribute("singleVente", venteService.singleVente(id));
-        return "Product/updateProduct";
+        model.addAttribute("products",cartService.cartList(venteService.singleVente(id).getCartId()));
+        return "Ventes/recu";
     }
-
+    @GetMapping("/delete/{id}")
+    public String deleteVente(@PathVariable("id") int id){
+        venteService.delete(id);
+        return "redirect:/ventes/list";
+    }
 
 
 }

@@ -39,8 +39,8 @@ public class CartController {
         }
         String cartId = buffer.toString();
         model.addAttribute("cartId", cartId);
-        model.addAttribute("articleList", articleService.ProductList());
-        model.addAttribute("cartList", cartService.cartList(cartId));
+        model.addAttribute("articleList", articleService.StocktList());
+
 
         return "Ventes/get";
     }
@@ -60,7 +60,7 @@ public class CartController {
             total+=cartService.cartList(id).get(i).getQuantity()*cartService.cartList(id).get(i).getPrice();
         }
         model.addAttribute("cartId", id);
-        model.addAttribute("articleList", articleService.ProductList());
+        model.addAttribute("articleList", articleService.StocktList());
         model.addAttribute("cartList", cartService.cartList(id));
         model.addAttribute("total", total);
 

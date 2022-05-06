@@ -11,7 +11,6 @@ public class Cart {
     private String cartId;
     private int quantity;
     private int price;
-    private int total;
     @ManyToOne
     @JoinColumn(name ="articleId",insertable = false,updatable = false)
     private Product product;
@@ -21,12 +20,11 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(int id, String cartId, int quantity, int price, int total, Product product, int articleId) {
+    public Cart(int id, String cartId, int quantity, int price,  Product product, int articleId) {
         this.id = id;
         this.cartId = cartId;
         this.quantity = quantity;
         this.price = price;
-        this.total = total;
         this.product = product;
         this.articleId = articleId;
     }
@@ -63,13 +61,7 @@ public class Cart {
         this.price = price;
     }
 
-    public int getTotal() {
-        return total;
-    }
 
-    public void setTotal(int total) {
-        this.total = total;
-    }
 
     public Product getProduct() {
         return product;

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recu de vente</title>
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <!-- BEGIN INVOICE -->
+        <div class="col-xs-12">
+            <div class="grid invoice">
+                <div class="grid-body">
+                    <div class="invoice-title">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="logo-lg">
+                                   <img th:src="@{/assets/images/logo-sm.svg}" alt="" height="24"> <span
+                                        class="logo-txt">Claudy Shop</span>
+                                </span>
+
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2>Recu<br>
+                                    <span>Numero:</span>
+                                    <span th:text="${singleVente.cartId}" class="small"></span></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <address>
+                                <strong>Client: </strong>
+                                <span th:text="${singleVente.client}"></span>
+                                <br>
+                                <strong>Date: </strong>
+                                <span th:text="${singleVente.date}"></span>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>ARTICLES PAYES</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr class="line">
+                                    <td class="text-center">ARTICLE</td>
+                                    <td class="text-center">PRIX</td>
+                                    <td class="text-right">QUANTITE</td>
+                                    <td class="text-right">SOUS TOTAL</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="article:${products}">
+                                    <td th:text="${article.product.libelle}"></td>
+                                    <td th:text="${article.price}"></td>
+                                    <td th:text="${article.quantity}"></td>
+                                    <td th:text="${article.quantity * article.price}"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                    </td><td class="text-right"><strong>TOTAL</strong></td>
+                                    <td class="text-right" th:text="${singleVente.total}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <a th:href="@{/ventes/list}" class="btn btn-primary">RETOUR</a>
+                </div>
+            </div>
+        </div>
+        <!-- END INVOICE -->
+    </div>
+</div>
+</body>
+</html>

@@ -191,9 +191,9 @@
                             <span data-key="t-ecommerce">Ventes</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="/ventes/list" key="ventes-list">Liste des ventes</a></li>
-                            <li><a href="ecommerce-product-detail.html" data-key="t-product-detail">Faire une vente</a></li>
-                            <li><a href="ecommerce-product-detail.html" data-key="t-product-detail">Vente par période</a></li>
+                            <li><a href="/ventes/list" key="ventes">Liste des ventes</a></li>
+                            <li><a href="/vente/new" data-key="vente-new">Faire une vente</a></li>
+                            <li><a href="/ventes/filter" data-key="filter">Vente par période</a></li>
 
                         </ul>
                     </li>
@@ -274,7 +274,10 @@
                                                 <a th:href="@{/vente/cart/{cartId}(cartId=${vente.cartId})}" class="btn btn-outline-secondary" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                                <a class="btn btn-outline-danger" th:href="@{/category/delete/{id}(id=${category.id})}" title="Supprimer">
+                                                <a class="btn btn-outline-primary" th:href="@{/ventes/recu/{id}(id=${vente.id})}" title="Recu">
+                                                    <i class="fas fa-print"></i>
+                                                </a>
+                                                <a class="btn btn-outline-danger" th:href="@{/ventes/delete/{id}(id=${vente.id})}" title="Supprimer">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
 
