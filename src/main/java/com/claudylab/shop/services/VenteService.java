@@ -1,30 +1,31 @@
 package com.claudylab.shop.services;
 
 import com.claudylab.shop.models.Cart;
+import com.claudylab.shop.models.Vente;
 import com.claudylab.shop.repository.CartRepository;
+import com.claudylab.shop.repository.VenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class CartService {
+public class VenteService {
 
     @Autowired
-    CartRepository cartRepository;
+    VenteRepository venteRepository;
 
-    public List<Cart> cartList(String ref){
-        return cartRepository.getListe(ref);
+    public List<Vente> venteList(){
+        return venteRepository.findAll();
     }
-    public void saveCart(Cart cart){
-        cartRepository.save(cart);
+    public void saveVente(Vente vente){
+        venteRepository.save(vente);
     }
     public void delete(int id){
-        cartRepository.deleteById(id);
+        venteRepository.deleteById(id);
     }
-    public Cart singleCart(int id){
-        return cartRepository.findById(id).get();
+    public Vente singleVente(int id){
+        return venteRepository.findById(id).get();
     }
 
 }

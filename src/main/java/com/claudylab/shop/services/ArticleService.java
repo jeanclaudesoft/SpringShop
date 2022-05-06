@@ -37,6 +37,10 @@ public class ArticleService {
         articleRepository.updateStock(id,qte);
     }
 
+    public void minusStock(int id,int qte){
+        articleRepository.minusStock(id,qte);
+    }
+
     public List<Product> underStocktList(){
         return articleRepository.underStockProduct();
     }

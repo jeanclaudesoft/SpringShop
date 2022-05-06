@@ -17,6 +17,8 @@ public interface ArticleRepository extends JpaRepository<Product, Integer> {
     @Transactional
     @Query("update Product p set p.stockQuantity=p.stockQuantity + :quantity where p.id= :id")
     void updateStock(@Param("id") int id, @Param("quantity") int qte);
+    @Query("update Product p set p.stockQuantity=p.stockQuantity - :quantity where p.id= :id")
+    void minusStock(@Param("id") int id, @Param("quantity") int qte);
     @Query("SELECT p FROM Product p WHERE p.stockQuantity <p.quantitySeuil")
     List<Product> underStockProduct();
 

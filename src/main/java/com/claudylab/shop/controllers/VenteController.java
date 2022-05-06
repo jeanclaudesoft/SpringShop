@@ -1,8 +1,11 @@
 package com.claudylab.shop.controllers;
 
 import com.claudylab.shop.models.Product;
+import com.claudylab.shop.models.Vente;
 import com.claudylab.shop.services.ArticleService;
+import com.claudylab.shop.services.CartService;
 import com.claudylab.shop.services.CategoryService;
+import com.claudylab.shop.services.VenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,66 +14,42 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 
 @Controller
-@RequestMapping("/article")
-public class ArticleController {
+@RequestMapping("/ventes")
+public class VenteController {
 
+    @Autowired
+    private VenteService venteService;
+
+    @Autowired
+    private CartService cartService;
     @Autowired
     private ArticleService articleService;
-
-    @Autowired
-    private CategoryService categoryService;
 
 
     @GetMapping("/list")
     public String viewCategories(Model model){
-        model.addAttribute("articleList", articleService.ProductList());
-        model.addAttribute("totalProduct", articleService.ProductCount());
-        return "Product/productList";
+        model.addAttribute("venteList", venteService.venteList());
+        return "Ventes/venteList";
     }
 
-    @GetMapping("/add")
-    public String addView(Model model){
-        model.addAttribute("categoryList",categoryService.categoryList());
-        return "Product/addProduct";
-    }
 
-    @PostMapping("/save")
-    public String saveCategory(Product product){
-        product.setStockQuantity(0);
-        product.setDateCreation(LocalDate.now());
-        articleService.createProduct(product);
-        return "redirect:/article/list";
+    @PostMapping("/save/{id}")
+    public String saveVente(@PathVariable("id") String id,Vente vente){
+        for (int i = 0; i <  cartService.cartList(id).size(); i++) {
+            articleService.minusStock(cartService.cartList(id).get(i).getArticleId(),cartService.cartList(id).get(i).getQuantity());
+        }
+        vente.setDate(LocalDate.now());
+        vente.setCartId(id);
+        venteService.saveVente(vente);
+        return "redirect:/ventes/list";
     }
 
     @GetMapping("/update/{id}")
     public String updateView(@PathVariable("id") int id,Model model){
-        model.addAttribute("singleProduct", articleService.singleProduct(id));
-        model.addAttribute("categoryList",categoryService.categoryList());
+        model.addAttribute("singleVente", venteService.singleVente(id));
         return "Product/updateProduct";
     }
 
-    @GetMapping("/appro/{id}")
-    public String approvisView(@PathVariable("id") int id,Model model){
-        model.addAttribute("singleProduct", articleService.singleProduct(id));
-        return "Approvisionnement/addAppro";
-    }
 
-    @PostMapping("/update")
-    public String update(@ModelAttribute("product") Product product){
-        articleService.createProduct(product);
-        return "redirect:/article/list";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteArticle(@PathVariable("id") int id){
-        articleService.deleteProduct(id);
-        return "redirect:/article/list";
-    }
-
-    @GetMapping("/stock")
-    public String getAppprovise(Model model){
-        model.addAttribute("articleList", articleService.underStocktList());
-        return "Product/approvise";
-    }
 
 }
