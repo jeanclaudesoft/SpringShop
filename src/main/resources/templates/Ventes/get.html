@@ -277,7 +277,7 @@
                                                     <div class="me-3" style="width: 120px;">
                                                         <div class="input-group  bootstrap-touchspin bootstrap-touchspin-injected">
                                                             <input type="number" onchange="change(this.value);"
-                                                                   value="1" min="1" name="demo_vertical" class="form-control" required>
+                                                                   value="1" min="1" id="qte" name="quantity" class="form-control" required>
 
                                                             <script>
                                                                 function change(val) {
@@ -285,7 +285,16 @@
                                                                         dst.value = val;
 
                                                                 };
+var number = document.getElementById('qte');
 
+                                                                    // Listen for input event on numInput.
+                                                                    number.onkeydown = function(e) {
+                                                                        if (!((e.keyCode > 95 && e.keyCode < 106) ||
+                                                                                (e.keyCode > 47 && e.keyCode < 58) ||
+                                                                                e.keyCode == 8)) {
+                                                                            return false;
+                                                                        }
+                                                                    }
 
                                                             </script>
                                                         </div>

@@ -35,10 +35,13 @@ public class VenteController {
 
     @PostMapping("/{cartId}/save")
     public String saveVente(@PathVariable("cartId") String id,Vente vente){
-        System.out.println("MON ID " + cartService.cartList(id).get(1).getProduct().getId());
-        for (int i = 0; i <  cartService.cartList(id).size(); i++) {
-            articleService.minusStock(cartService.cartList(id).get(i).getProduct().getId(),cartService.cartList(id).get(i).getQuantity());
-        }
+        if (cartService.cartList(id).size()>1){
+            for (int i = 0; i <  cartService.cartList(id).size(); i++) {
+                articleService.minusStock(cartService.cartList(id).get(i).getProduct().getId(),cartService.cartList(id).get(i).getQuantity());
+            }
+
+        } else articleService.minusStock(cartService.cartList(id).get(0).getProduct().getId(),cartService.cartList(id).get(0).getQuantity());
+
         vente.setDate(LocalDate.now());
         vente.setCartId(id);
         venteService.saveVente(vente);
@@ -54,7 +57,13 @@ public class VenteController {
     }
     @GetMapping("/delete/{id}")
     public String deleteVente(@PathVariable("id") int id){
+        for (int i = 0; i <cartService.cartList(venteService.singleVente(id).getCartId()).size() ; i++) {
+
+            articleService.updateStock(cartService.cartList(venteService.singleVente(id).getCartId()).get(i).getArticleId(),cartService.cartList(venteService.singleVente(id).getCartId()).get(i).getQuantity());
+        }
         venteService.delete(id);
+
+
         return "redirect:/ventes/list";
     }
 
