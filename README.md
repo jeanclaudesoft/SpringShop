@@ -1,6 +1,5 @@
 # SpringShop
-#Projet d'etude
-#Comment utiliser?
+# Comment utiliser le projet?
  - Cloner le projet
  - Créer une base de données shop
  - Lancer le projet
