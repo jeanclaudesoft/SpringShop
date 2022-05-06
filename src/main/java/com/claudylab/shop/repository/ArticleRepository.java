@@ -28,4 +28,7 @@ public interface ArticleRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p WHERE p.stockQuantity >0")
     List<Product> StockProduct();
 
+    @Query(value = "SELECT sum(stockQuantity) FROM Product")
+    public Long totalStock();
+
 }

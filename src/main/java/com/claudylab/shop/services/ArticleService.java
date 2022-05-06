@@ -33,6 +33,11 @@ public class ArticleService {
         return  articleRepository.count();
     }
 
+    public Long totalStock(){
+        return  articleRepository.totalStock();
+    }
+
+
     public void updateStock(int id,int qte){
         articleRepository.updateStock(id,qte);
     }

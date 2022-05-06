@@ -31,6 +31,7 @@ public class HomeController {
         model.addAttribute("totalStock",approviseService.underStockCount());
         model.addAttribute("totalVente",venteService.venteCount());
         model.addAttribute("montantTotal",venteService.totalVente());
+        model.addAttribute("allStock",articleService.totalStock());
         return "Home/index";
     }
 }
